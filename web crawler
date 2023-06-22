@@ -1,0 +1,49 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+#function to scrape google search results
+def scrape_google_results(query, num_ results):
+  #Create the URL for the google search with the specified query and number of results
+  Url=f"https://www.google.com/search?q={query}&num={num_results}"
+  #set headers to mimic a web browser
+  headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
+  #send a GET request to the URL and retrieve the html response
+  response=requests.get(url,headers=headers)
+  #Raise an exception if the request was not successful
+  respone.raise_for_status()
+  #reture the HTML response text
+  return response.text
+#Function to parse youtube links from search results
+def parse_youtube_links(html):
+  #create a beautifulsoup object from the HTML
+  soup=Beautifulsoup(html,"html.parser")
+  #create an empty list to store the youtube links
+  links=[]
+  #finds all <a> tags in the HTML
+  for link in soup.find_all("a"):
+    #get the value of the "href" attribute
+    href+link.get(href")
+    #check if the link contains a youtube url
+    if href and "/url?q= https://www.youtube.com/" in href:
+      #Extract the youtube link from the href value
+      youtube_link= href.split("/url?q=")[1].split("&")[0]
+      #add the youtube link to the list
+      list.append(youtube_link)
+    #Reture the list of Youtube links
+    reture links
+#Scrape google search results
+search_input = "site:http://youtube.com http://openinapp.co"
+num_results=10_000
+#call the fuction to scrape google seach results with the specified query and number of results
+htm=scrape_google_results(search_input, num_result)
+#parse youtube links from search results
+youtube_link=parse_youtube_link(html)
+#save the results in JSON file
+output_file ="youtube_link.json"
+with open (output_file, "w") as file:
+  #write the youtube links to JSON file with i denttion for readability
+  json.dump(youtube_links,indent=4)
+#print the number of scraped youtube links and the name of the output file
+print(f"Scraped{len(youtube_links)}youtube links. Saved results in {output_file}.")
+
+    
